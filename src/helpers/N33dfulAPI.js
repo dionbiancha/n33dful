@@ -2,7 +2,7 @@
 const N33dfulAPI = {
   login: async(email, password) => {
     //consulta ao BD
-    return {};
+    return {error: 'Funcionalidade Incompleta'};
   }
 };
 
