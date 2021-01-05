@@ -70,6 +70,13 @@ const N33dfulAPI = {
       '/states'
     );
     return json.states;
+  },
+
+  getCategories: async() => {
+    const json = await apiFetchGet(
+      '/categories'
+    );
+    return json.categories;
   }
 };
 
