@@ -57,6 +57,14 @@ const N33dfulAPI = {
     return json;
   },
 
+  register: async(name, stateLoc, email, password) => {
+    const json = await apiFetchPost(
+      '/user/signup',
+      {name, state: stateLoc, email, password}
+    );
+    return json;
+  },
+
   getStates: async() => {
     const json = await apiFetchGet(
       '/states'

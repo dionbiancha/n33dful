@@ -54,6 +54,7 @@ nav {
     text-decoration: none;
     cursor: pointer;
     outline: 0;
+    background-color: #FFF;
 
     &:hover {
       color: #888;
