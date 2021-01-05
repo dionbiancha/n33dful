@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { PageArea } from './styled';
 import { PageContainer, PageTitle, ErrorMessage } from '../../components/MainComponents';
@@ -9,16 +9,29 @@ import { doLogin } from '../../helpers/AuthHandler';
 const Page = () => {
   const api = useApi();
 
+  const [name, setName] = useState('');
+  const [stateLoc, setStateLoc] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberPassword, setRememberPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const [stateList, setStateList] = useState([]);
+
   const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(()=>{
+    const getStates = async () => {
+      const slist = await api.getStates();
+      setStateList(slist);
+    }
+    getStates();
+  }, []);
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     setDisabled(true);
-
+    /*
     const json = await api.login(email, password);
 
     if(json.error) {
@@ -27,12 +40,13 @@ const Page = () => {
       doLogin(json.token, rememberPassword);
       window.location.href = "/";
     }
+    */
     setDisabled(false);
   };
 
   return(
     <PageContainer>
-      <PageTitle>Login</PageTitle>
+      <PageTitle>Cadastro</PageTitle>
       <PageArea>
         {error &&
           <ErrorMessage>
@@ -40,6 +54,29 @@ const Page = () => {
           </ErrorMessage>
         }
         <form onSubmit={handleSubmit}>
+        <label className="area">
+            <div className="area--title">Nome Completo</div>
+            <div className="area--input">
+              <input 
+                type="text" 
+                disabled={disabled}
+                value={name}
+                onChange={(e)=> setName(e.target.value)}
+                required
+              />
+            </div>
+          </label>
+          <label className="area">
+            <div className="area--title">Estado</div>
+            <div className="area--input">
+              <select value={stateLoc} onChange={e=>setStateLoc(e.target.value)} required>
+                <option></option>
+                {stateList.map((i, k )=> 
+                  <option key={k} value={i._id}>{i.name}</option>
+                )}
+              </select>
+            </div>
+          </label>
           <label className="area">
             <div className="area--title">Email</div>
             <div className="area--input">
@@ -65,20 +102,21 @@ const Page = () => {
             </div>
           </label>
           <label className="area">
-            <div className="area--title">Lembrar senha</div>
+            <div className="area--title">Confirmar Senha</div>
             <div className="area--input">
               <input 
-                type="checkbox" 
+                type="password" 
                 disabled={disabled}
-                checked={rememberPassword}
-                onChange={(e)=>setRememberPassword(!rememberPassword)}
+                value={confirmPassword}
+                onChange={(e)=> setConfirmPassword(e.target.value)}
+                required
               />
             </div>
           </label>
           <label className="area">
             <div className="area--title"></div>
             <div className="area--input">
-              <button disabled={disabled}>Fazer Login</button>
+              <button disabled={disabled}>Fazer Cadastro</button>
             </div>
           </label>
         </form>
