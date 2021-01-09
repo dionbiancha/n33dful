@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import MaskedInput from 'react-text-mask';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 import { PageArea } from './styled';
@@ -9,6 +10,7 @@ import useApi from '../../helpers/N33dfulAPI';
 const Page = () => {
   const api = useApi();
   const fileField = useRef();
+  const history = useHistory();
 
   const [categories, setCategories] = useState([]);
 
@@ -35,21 +37,48 @@ const Page = () => {
     setDisabled(true);
     setError('');
 
-    /*
-    const json = await api.login(email, password);
+    let errors = [];
 
-    if(json.error) {
-      setError(json.error);
-    } else {
-      doLogin(json.token, rememberPassword);
-      window.location.href = "/";
+    if(!title.trim()) {
+      errors.push('Sem titulo');
     }
-    */
+
+    if(!category) {
+      errors.push('Sem categoria');
+    }
+
+    if(errors.length === 0) {
+      const fData = new FormData();
+      fData.append('title', title);
+      fData.append('price', price);
+      fData.append('priceneg', priceNegotiable);
+      fData.append('desc', desc);
+      fData.append('cat', category);
+
+      if(fileField.current.files.length > 0) {
+        for(let i = 0; i < fileField.current.files.length; i++) {
+          fData.append('img', fileField.current.files[i]);
+        }
+      }
+
+      const json = await api.addAd(fData);
+
+      if(!json.error) {
+        history.push(`/ad/${json.id}`);
+        return;
+      } else {
+        setError(json.error);
+      }
+
+    } else {
+      setError(errors.join("\n"))
+    }
+
     setDisabled(false);
   };
 
   const priceMask = createNumberMask({
-    prefix:'R$',
+    prefix:'R$ ',
     includeThousandsSeparator: true,
     thousandsSeparatorSymbol: '.',
     allowDecimal: true,
