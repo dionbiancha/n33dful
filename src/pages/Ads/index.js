@@ -22,15 +22,16 @@ const Page = () => {
   const [cat, setCat] = useState(query.get('cat') != null ? query.get('cat') : '');
   const [state, setState] = useState(query.get('state') != null ? query.get('state') : '');
 
+  const [adsTotal, setAdsTotal] = useState(0);
   const [stateList, setStateList] = useState([]);
   const [categories, setCategories] = useState([]);
   const [adList, setAdList] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
 
   const [resultOpacity, setResultOpacity] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const getAdsList = async () => {
-    const getRecentAds = async () => {
       setLoading(true);
       const json = await api.getAds({
         sort:'desc',
@@ -40,11 +41,18 @@ const Page = () => {
         state
       });
       setAdList(json.ads);
+      setAdsTotal(json.total);
       setResultOpacity(1);
       setLoading(false);
-    }
-    getRecentAds();
   }
+
+  useEffect(()=>{
+    if(adList.length > 0) {
+      setPageCount( Math.ceil( adsTotal / adList.length ));
+    } else {
+      setPageCount(0);
+    } 
+  }, [adsTotal]);
 
   useEffect(()=>{
     let queryString = [];
@@ -84,7 +92,12 @@ const Page = () => {
       setCategories(cats);
     }
     getCategories();
-  });
+  }, []);
+
+  let pagination = [];
+  for(let i=0; i<=pageCount; i++) {
+    pagination.push(i);
+  }
 
   return(
     <PageContainer>
@@ -133,6 +146,13 @@ const Page = () => {
             {adList.map((i, k) => 
               <AdItem key={k} data={i} />
             )}
+          </div>
+          <div className="pagination">
+              {pagination.map((i, k)=> 
+                <div className="pagItem">
+                  {i}
+                </div>
+              )}
           </div>
         </div>
       </PageArea>
