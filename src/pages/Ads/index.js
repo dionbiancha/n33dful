@@ -27,18 +27,22 @@ const Page = () => {
   const [categories, setCategories] = useState([]);
   const [adList, setAdList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [resultOpacity, setResultOpacity] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const getAdsList = async () => {
       setLoading(true);
+      let offset = (currentPage-1) * 9
+
       const json = await api.getAds({
         sort:'desc',
         limit:9,
         q,
         cat,
-        state
+        state,
+        offset
       });
       setAdList(json.ads);
       setAdsTotal(json.total);
@@ -53,6 +57,12 @@ const Page = () => {
       setPageCount(0);
     } 
   }, [adsTotal]);
+
+  useEffect(()=> {
+    setResultOpacity(0.3);
+
+    getAdsList();
+  }, [currentPage]);
 
   useEffect(()=>{
     let queryString = [];
@@ -76,6 +86,7 @@ const Page = () => {
     }
     timer = setTimeout(getAdsList, 2000);
     setResultOpacity(0.3);
+    setCurrentPage(1);
   },[q, cat, state]);
 
   useEffect(()=>{
@@ -95,7 +106,7 @@ const Page = () => {
   }, []);
 
   let pagination = [];
-  for(let i=0; i<=pageCount; i++) {
+  for(let i=1; i<=pageCount; i++) {
     pagination.push(i);
   }
 
@@ -136,7 +147,7 @@ const Page = () => {
         </div>
         <div className="rightSide">
           <h2>Resultados</h2>
-          {loading &&
+          {loading && adList.length === 0 &&
             <div className="listWarning">Carregando...</div>
           }
           {!loading && adList.length === 0 &&
@@ -149,7 +160,7 @@ const Page = () => {
           </div>
           <div className="pagination">
               {pagination.map((i, k)=> 
-                <div className="pagItem">
+                <div onClick={()=>setCurrentPage(i)} className={i===currentPage?'pagItem active':'pagItem'}>
                   {i}
                 </div>
               )}
