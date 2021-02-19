@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.039d7534.chunk.css",
-    "main.js": "/static/js/main.c43a028e.chunk.js",
-    "main.js.map": "/static/js/main.c43a028e.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.3f826408.js",
-    "runtime-main.js.map": "/static/js/runtime-main.3f826408.js.map",
-    "static/css/2.b57b7cfd.chunk.css": "/static/css/2.b57b7cfd.chunk.css",
-    "static/js/2.a47e6a18.chunk.js": "/static/js/2.a47e6a18.chunk.js",
-    "static/js/2.a47e6a18.chunk.js.map": "/static/js/2.a47e6a18.chunk.js.map",
-    "static/js/3.fc84d0d0.chunk.js": "/static/js/3.fc84d0d0.chunk.js",
-    "static/js/3.fc84d0d0.chunk.js.map": "/static/js/3.fc84d0d0.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.b57b7cfd.chunk.css.map": "/static/css/2.b57b7cfd.chunk.css.map",
-    "static/css/main.039d7534.chunk.css.map": "/static/css/main.039d7534.chunk.css.map",
-    "static/js/2.a47e6a18.chunk.js.LICENSE.txt": "/static/js/2.a47e6a18.chunk.js.LICENSE.txt"
+    "main.css": "/n33dful-frontend/static/css/main.039d7534.chunk.css",
+    "main.js": "/n33dful-frontend/static/js/main.c43a028e.chunk.js",
+    "main.js.map": "/n33dful-frontend/static/js/main.c43a028e.chunk.js.map",
+    "runtime-main.js": "/n33dful-frontend/static/js/runtime-main.5e73d62a.js",
+    "runtime-main.js.map": "/n33dful-frontend/static/js/runtime-main.5e73d62a.js.map",
+    "static/css/2.b57b7cfd.chunk.css": "/n33dful-frontend/static/css/2.b57b7cfd.chunk.css",
+    "static/js/2.f8aab8dd.chunk.js": "/n33dful-frontend/static/js/2.f8aab8dd.chunk.js",
+    "static/js/2.f8aab8dd.chunk.js.map": "/n33dful-frontend/static/js/2.f8aab8dd.chunk.js.map",
+    "static/js/3.fc84d0d0.chunk.js": "/n33dful-frontend/static/js/3.fc84d0d0.chunk.js",
+    "static/js/3.fc84d0d0.chunk.js.map": "/n33dful-frontend/static/js/3.fc84d0d0.chunk.js.map",
+    "index.html": "/n33dful-frontend/index.html",
+    "static/css/2.b57b7cfd.chunk.css.map": "/n33dful-frontend/static/css/2.b57b7cfd.chunk.css.map",
+    "static/css/main.039d7534.chunk.css.map": "/n33dful-frontend/static/css/main.039d7534.chunk.css.map",
+    "static/js/2.f8aab8dd.chunk.js.LICENSE.txt": "/n33dful-frontend/static/js/2.f8aab8dd.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3f826408.js",
+    "static/js/runtime-main.5e73d62a.js",
     "static/css/2.b57b7cfd.chunk.css",
-    "static/js/2.a47e6a18.chunk.js",
+    "static/js/2.f8aab8dd.chunk.js",
     "static/css/main.039d7534.chunk.css",
     "static/js/main.c43a028e.chunk.js"
   ]
